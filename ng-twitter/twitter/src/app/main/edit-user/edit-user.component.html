@@ -1,0 +1,54 @@
+<Modal
+  [isOpen]="true"
+  (formSubmitted)="submit()"
+  [disabled]="editProfile.invalid"
+  actionLabel="Save"
+  title="Edit your profile"
+  (onClose)="modalService.isEditModelOpen.set(false)"
+>
+  <form [formGroup]="editProfile">
+    <div class="flex flex-col gap-4">
+      <div class="form-wrapper">
+        <input
+          type="text"
+          placeholder="Name"
+          formControlName="displayName"
+          [ngClass]="getInputClasses('displayName')"
+        />
+        <ng-container
+          *ngIf="
+            editProfile.get('displayName')?.invalid &&
+            editProfile.get('displayName')?.touched
+          "
+        >
+          <span class="text-red-500 text-sm ps-2"> What is your name? </span>
+        </ng-container>
+      </div>
+      <div class="form-wrapper">
+        <input
+          type="text"
+          placeholder="Username"
+          formControlName="username"
+          [ngClass]="getInputClasses('username')"
+        />
+        <ng-container
+          *ngIf="
+            editProfile.get('username')?.invalid &&
+            editProfile.get('username')?.touched
+          "
+        >
+          <span class="text-red-500 text-sm ps-2">
+            What is your username?
+          </span>
+        </ng-container>
+      </div>
+      <div class="form-wrapper">
+        <textarea
+          [ngClass]="getInputClasses('bio')"
+          placeholder="Bio"
+          formControlName="bio"
+        ></textarea>
+      </div>
+    </div>
+  </form>
+</Modal>

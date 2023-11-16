@@ -1,0 +1,17 @@
+<div class="h-screen bg-black">
+    <div class="container h-full mx-auto xl:px-30 max-w-6xl">
+        <div class="grid grid-cols-4 h-full">
+            <app-sidebar></app-sidebar>
+            <div class="col-span-3 lg:col-span-2 border-x-[1px] border-neutral-800">
+                <!-- Header -->
+                <app-header [title]="config.headerTitle()" [showBackArrow]="config.showBackArrow()"></app-header>
+                <router-outlet></router-outlet>
+            </div>
+            <!-- Follow Bar -->
+            <app-follow-bar></app-follow-bar>
+        </div>
+    </div>
+</div>
+
+<app-login-modal *ngIf="modalService.isLoginModelOpen()"></app-login-modal>
+<app-register-modal *ngIf="modalService.isRegisterModalOpen()"></app-register-modal>

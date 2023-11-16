@@ -1,0 +1,60 @@
+<Modal
+  [isOpen]="true"
+  [disabled]="loginForm.invalid"
+  title="Login"
+  actionLabel="Sign in"
+  (onClose)="modalService.isLoginModelOpen.set(false)"
+  [footer]="footer"
+  (formSubmitted)="handleSubmit()"
+>
+  <form [formGroup]="loginForm">
+    <div class="flex flex-col gap-4">
+      <div class="form-wrapper">
+        <input
+          type="text"
+          placeholder="Email"
+          formControlName="email"
+          [ngClass]="getInputClasses('email')"
+        />
+        <ng-container
+          *ngIf="
+            loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+          "
+        >
+          <span class="text-red-500 text-sm ps-2">
+            What is your email address?
+          </span>
+        </ng-container>
+      </div>
+      <div class="form-wrapper">
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+          [ngClass]="getInputClasses('password')"
+        />
+        <ng-container
+          *ngIf="
+            loginForm.get('password')?.invalid &&
+            loginForm.get('password')?.touched
+          "
+        >
+          <span class="text-red-500 text-sm ps-2">
+            Please secure your account.
+          </span>
+        </ng-container>
+      </div>
+    </div>
+  </form>
+</Modal>
+
+<ng-template #footer>
+  <div class="text-neutral-400 text-center mt-4">
+    <p>
+      First time using Twitter?
+      <a (click)="signUp()" class="text-white cursor-pointer">
+        Create an Account
+      </a>
+    </p>
+  </div>
+</ng-template>

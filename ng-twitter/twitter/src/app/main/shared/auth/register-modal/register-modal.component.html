@@ -1,0 +1,82 @@
+<Modal actionLabel="Register" [isOpen]="true" title="Create an Account"
+(onClose)="modalService.isRegisterModalOpen.set(false)" (formSubmitted)="handleSubmit()" [footer]="footer" [disabled]="registerForm.invalid">
+
+<form [formGroup]="registerForm">
+    <div class="flex flex-col gap-4">
+      <div class="form-wrapper">
+        <input
+          type="text"
+          placeholder="Email"
+          formControlName="email"
+          [ngClass]="getInputClasses('email')"
+        />
+        <ng-container
+          *ngIf="
+            registerForm.get('email')?.invalid && registerForm.get('email')?.touched
+          "
+        >
+          <span class="text-red-500 text-sm ps-2">
+            What is your email address?
+          </span>
+        </ng-container>
+      </div>
+      <div class="form-wrapper">
+        <input type="text" [ngClass]="getInputClasses('name')" placeholder="Name" formControlName="name">
+        <ng-container
+          *ngIf="
+            registerForm.get('name')?.invalid && registerForm.get('name')?.touched
+          "
+        >
+          <span class="text-red-500 text-sm ps-2">
+            What is your name?
+          </span>
+        </ng-container>
+      </div>
+      <div class="form-wrapper">
+        <input type="text" [ngClass]="getInputClasses('username')" placeholder="Username" formControlName="username">
+        <ng-container
+          *ngIf="
+            registerForm.get('username')?.invalid && registerForm.get('username')?.touched
+          "
+        >
+          <span class="text-red-500 text-sm ps-2">
+            What is your username?
+          </span>
+        </ng-container>
+      </div>
+      <div class="form-wrapper">
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+          [ngClass]="getInputClasses('password')"
+        />
+        <ng-container
+          *ngIf="
+            registerForm.get('password')?.invalid &&
+            registerForm.get('password')?.touched
+          "
+        >
+          <span class="text-red-500 text-sm ps-2" *ngIf="registerForm.get('password')?.hasError('required')">
+            Please secure your account.
+          </span>
+          <span class="text-red-500 text-sm ps-2" *ngIf="registerForm.get('password')?.hasError('minlength')">
+            Password should be more than 6 characters.
+          </span>
+        </ng-container>
+      </div>
+    </div>
+  </form>
+
+</Modal>
+
+<ng-template #footer>
+    <div class="text-neutral-400 text-center mt-4">
+      <p>
+        Already have an account?
+        <a (click)="login()" class="text-white cursor-pointer">
+          Sign in
+        </a>
+      </p>
+    </div>
+  </ng-template>
